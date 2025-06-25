@@ -28,6 +28,12 @@ export default class Post extends Model{
           }
         }
       },
+      post_likes: {
+        type: Sequelize.VIRTUAL,
+        get() {
+          return this.getDataValue('post_likes') || 0;
+        }
+      }
     },
     {
       sequelize
