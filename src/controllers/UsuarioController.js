@@ -1,7 +1,7 @@
 import Usuario from '../models/Usuario'
 
 class UsuarioController {
-  async create(req , res){
+  async create(req, res){
     try{
       const novoUsuario = await Usuario.create(req.body)
       res.json(novoUsuario)
