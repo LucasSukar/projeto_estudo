@@ -22,15 +22,15 @@ module.exports = {
         },
         titulo: {
           type: Sequelize.STRING,
-          allowNull: false
+          allowNull: true
         },
         texto: {
           type: Sequelize.STRING,
-          allowNull: false
+          allowNull: true
         },
         resumo: {
           type: Sequelize.STRING,
-          allowNull: false
+          allowNull: true
         },
         data_publicacao: {
           type: Sequelize.DATE,
