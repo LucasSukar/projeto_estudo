@@ -1,6 +1,8 @@
 import express from 'express'
 import homeRoutes from './src/routes/home'
+//routes
 import usuarioRoutes from './src/routes/usuariosRoute'
+import postRoutes from './src/routes/postRoute'
 
 import './src/database'
 
@@ -20,6 +22,7 @@ class App{
   routes(){
     this.app.use('/',homeRoutes)
     this.app.use('/usuarios/', usuarioRoutes)
+    this.app.use('/posts/', postRoutes)
   }
 }
 
