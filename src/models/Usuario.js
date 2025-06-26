@@ -49,9 +49,12 @@ export default class Usuario extends Model{
       if(usuario.password){
         usuario.senha = await bcryptjs.hash(usuario.password, 8)
       }
-      
+
     })
     return this
   }
+    senhaValida(password){
+      return bcryptjs.compare(password, this.senha)
+    }
 }
 

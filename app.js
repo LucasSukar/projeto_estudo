@@ -1,6 +1,6 @@
 import express from 'express'
-import homeRoutes from './src/routes/home'
 //routes
+import tokenRoutes from './src/routes/tokenRoute'
 import usuarioRoutes from './src/routes/usuariosRoute'
 import postRoutes from './src/routes/postRoute'
 
@@ -20,7 +20,7 @@ class App{
     this.app.use(express.json())
   }
   routes(){
-    this.app.use('/',homeRoutes)
+    this.app.use('/tokens',tokenRoutes)
     this.app.use('/usuarios/', usuarioRoutes)
     this.app.use('/posts/', postRoutes)
   }
