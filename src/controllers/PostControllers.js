@@ -24,29 +24,56 @@ class PostController {
 
   async update(req, res) {
     try {
-      const { id } = req.params;
+      const { id } = req.params
 
       if (!id) {
         return res.status(400).json({
           errors: ['ID não informado para atualização']
-        });
+        })
       }
 
-      const post = await Post.findByPk(id);
+      const post = await Post.findByPk(id)
 
       if (!post) {
         return res.status(404).json({
           errors: ['Post não encontrado']
-        });
+        })
       }
 
-      await post.update(req.body);
+      await post.update(req.body)
+      return res.json(post)
 
-      return res.json(post); // retorna o post atualizado
     } catch (e) {
-      console.error(e);
-      return res.status(500).json({ error: 'Erro ao atualizar o post' });
+      console.error(e)
+      return res.status(500).json({ error: 'Erro ao atualizar o post' })
+    }
+  }
+
+  async delete(req, res){
+    try{
+      const { id } = req.params
+      if(!id){
+        return res.status(400).json({
+          errors: ['ID não informado para atualização']
+        })
+      }
+
+      const post = await Post.findByPk(id)
+
+      if (!post) {
+        return res.status(404).json({
+          errors: ['Post não encontrado']
+        })
+      }
+
+      await post.destroy()
+
+      return res.json(null)
+
+    }catch(e){
+      return res.status(e)
     }
   }
 }
+
 export default new PostController()
