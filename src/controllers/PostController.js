@@ -1,5 +1,6 @@
 import Post from '../models/Post'
 
+
 class PostController {
   async create(req, res){
     try{
@@ -24,28 +25,29 @@ class PostController {
 
   async update(req, res) {
     try {
-      const { id } = req.params
+      const { id } = req.params;
+      const usuarioId = req.usuarioId;
 
-      if (!id) {
-        return res.status(400).json({
-          errors: ['ID não informado para atualização']
-        })
-      }
-
-      const post = await Post.findByPk(id)
+      const post = await Post.findByPk(id);
 
       if (!post) {
         return res.status(404).json({
           errors: ['Post não encontrado']
-        })
+        });
       }
 
-      await post.update(req.body)
-      return res.json(post)
+      if (post.usuario_id !== usuarioId) {
+        return res.status(403).json({
+          errors: ['Você não tem permissão para editar este post']
+        });
+      }
+
+      await post.update(req.body);
+      return res.json(post);
 
     } catch (e) {
-      console.error(e)
-      return res.status(500).json({ error: 'Erro ao atualizar o post' })
+      console.error(e);
+      return res.status(500).json({ error: 'Erro ao atualizar o post' });
     }
   }
 
